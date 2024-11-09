@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurante</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('index') }}">Inicio</a> |
+      <a href="{{ url_for('platos') }}">Platos</a> |
+      <a href="{{ url_for('mesas') }}">Mesas</a> |
+      <a href="{{ url_for('pedidos') }}">Pedidos</a>
+    </nav>
+
+    <h1>Platos</h1>
+    <div class="container">
+      <h2>Menú</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for plato in platos %}
+            <tr>
+              <td>{{ plato.0 }}</td>
+              <td>{{ plato.1 }}</td>
+              <td>
+                <form method="POST" action="{{ url_for('actualizar_plato', nombre=plato.0) }}">
+                  <input type="number" name="precio" value="{{ plato.1 }}" />
+                  <button type="submit">Actualizar</button>
+                </form>
+                <form method="POST" action="{{ url_for('eliminar_plato', nombre=plato.0) }}">
+                  <button type="submit">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h2>Agregar Plato</h2>
+      <form method="POST" action="{{ url_for('crear_plato') }}">
+        Nombre:<input type="text" name="nombre" /><br />
+        Precio:<input type="number" name="precio" /><br />
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+
+    <h2>Pedidos</h2>
+  </body>
+</html>

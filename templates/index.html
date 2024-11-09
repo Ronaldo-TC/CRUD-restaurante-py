@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurante</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('index') }}">Inicio</a> |
+      <a href="{{ url_for('platos') }}">Platos</a> |
+      <a href="{{ url_for('mesas') }}">Mesas</a> |
+      <a href="{{ url_for('pedidos') }}">Pedidos</a>
+    </nav>
+
+    <h2>Bienvenido a la aplicación de gestión del restaurante</h2>
+  </body>
+</html>

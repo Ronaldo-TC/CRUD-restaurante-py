@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+<nav>
+  <a href="{{ url_for('index') }}">Inicio</a> |
+  <a href="{{ url_for('platos') }}">Platos</a> |
+  <a href="{{ url_for('mesas') }}">Mesas</a> |
+  <a href="{{ url_for('pedidos') }}">Pedidos</a>
+</nav>
+<h1>MESAS</h1>
+
+<div class="container">
+  <h2>Mesas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mesa in mesas %}
+        <tr>
+          <td>{{ mesa.0 }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('actualizar_mesa', numero=mesa.0) }}">
+              <input type="number" name="numero" value="{{ mesa.0 }}" />
+              <button type="submit">Actualizar</button>
+            </form>
+            <form method="POST" action="{{ url_for('eliminar_mesa', numero=mesa.0) }}">
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Agregar Mesa</h2>
+  <form method="POST" action="{{ url_for('crear_mesa') }}">
+    Número:<input type="number" name="numero" /><br />
+    <button type="submit">Agregar</button>
+  </form>
+</div>
